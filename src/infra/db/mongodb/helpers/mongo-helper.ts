@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb'
+import { Collection, MongoClient } from 'mongodb'
 
 export class MongoHelper {
   private client: MongoClient
@@ -8,7 +8,7 @@ export class MongoHelper {
   public static readonly instance: MongoHelper = new MongoHelper()
 
   async connect (uri: string): Promise<void> {
-    if (this.client) {
+    if (!this.client) {
       this.client = await MongoClient.connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -17,10 +17,13 @@ export class MongoHelper {
   }
 
   async disconnect (): Promise<void> {
-    await this.client.close()
+    if (this.client) {
+      await this.client.close()
+    }
   }
 
-  getDb (): MongoClient {
-    return this.client
+  async getCollection (name: string): Promise<Collection> {
+    await this.connect('')
+    return this.client.db().collection(name)
   }
 }
