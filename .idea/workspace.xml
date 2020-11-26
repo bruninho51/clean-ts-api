@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feat" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feat" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8d1f75be-f1d7-4805-a608-eea196174a9d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/data/protocols/criptography/encrypter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/protocols/criptography/hasher.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/usecases/add-account/db-add-account-protocols.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/add-account/db-add-account-protocols.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/usecases/add-account/db-add-account.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/add-account/db-add-account.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/usecases/add-account/db-add-account.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/add-account/db-add-account.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infra/criptography/bcrypt-adapter.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/infra/criptography/bcrypt-adapter.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infra/criptography/bcrypt-adapter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/infra/criptography/bcrypt-adapter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/protocols/criptography/token-generator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/protocols/criptography/encrypter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication-protocols.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication-protocols.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +70,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606400164081</updated>
       <workItem from="1606400166005" duration="448000" />
-      <workItem from="1606400833727" duration="753000" />
+      <workItem from="1606400833727" duration="1061000" />
     </task>
     <servers />
   </component>
@@ -61,9 +89,9 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="387" y="0" width="592" height="732" key="find.popup" timestamp="1606401585899">
+    <state x="387" y="0" width="592" height="732" key="find.popup" timestamp="1606401894299">
       <screen x="0" y="0" width="1366" height="732" />
     </state>
-    <state x="387" y="0" width="592" height="732" key="find.popup/0.0.1366.732@0.0.1366.732" timestamp="1606401585899" />
+    <state x="387" y="0" width="592" height="732" key="find.popup/0.0.1366.732@0.0.1366.732" timestamp="1606401894299" />
   </component>
 </project>
