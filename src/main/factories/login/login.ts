@@ -1,4 +1,4 @@
-import { SignUpController } from '../../../presentations/controllers/signup/signup'import { LogControllerDecorator } from '../../decorators/log'
+import { LogControllerDecorator } from '../../decorators/log'
 import { Controller } from '../../../presentations/protocols'
 import { LogMongoRepository } from '../../../infra/db/mongodb/log-repository/log'
 import { makeLoginValidation } from './login-validation'
