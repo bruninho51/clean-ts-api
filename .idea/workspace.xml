@@ -30,7 +30,30 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d1f75be-f1d7-4805-a608-eea196174a9d" name="Default Changelist" comment="" />
+    <list default="true" id="8d1f75be-f1d7-4805-a608-eea196174a9d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/protocols/db/add-account-repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/protocols/db/account/add-account-repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/protocols/db/load-account-by-email-repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/protocols/db/account/load-account-by-email-repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/protocols/db/log-error-repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/protocols/db/log/log-error-repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/protocols/db/update-access-token-repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/protocols/db/account/update-access-token-repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/usecases/add-account/db-add-account-protocols.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/add-account/db-add-account-protocols.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication-protocols.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication-protocols.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infra/db/mongodb/account-repository/account.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/infra/db/mongodb/account/account-mongo-repository.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infra/db/mongodb/account-repository/account.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/infra/db/mongodb/account/account-mongo-repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infra/db/mongodb/log-repository/log.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/infra/db/mongodb/log/log-mongo-repository.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infra/db/mongodb/log-repository/log.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/infra/db/mongodb/log/log-mongo-repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/decorators/log.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/decorators/log-controller-decorator.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/decorators/log.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/decorators/log-controller-decorator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/factories/login/login-validation.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/factories/login/login-validation-factory.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/factories/login/login-validation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/factories/login/login-validation-factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/factories/login/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/factories/login/login-factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/factories/signup/signup-validation.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/factories/signup/signup-validation-factory.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/factories/signup/signup-validation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/factories/signup/signup-validation-factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/factories/signup/signup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/factories/signup/signup-factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/routes/signup-routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/routes/signup-routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentations/controllers/login/login.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentations/controllers/login/login-controller.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentations/controllers/login/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentations/controllers/login/login-controller.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,8 +75,15 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/data/protocols/db/log" />
+      <recent name="$PROJECT_DIR$/src/data/protocols/db/account" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -66,6 +96,7 @@
       <workItem from="1606400166005" duration="448000" />
       <workItem from="1606400833727" duration="1061000" />
       <workItem from="1606410909118" duration="377000" />
+      <workItem from="1606414274744" duration="708000" />
     </task>
     <servers />
   </component>

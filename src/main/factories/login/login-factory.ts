@@ -1,8 +1,8 @@
-import { LogControllerDecorator } from '../../decorators/log'
+import { LogControllerDecorator } from '../../decorators/log-controller-decorator'
 import { Controller } from '../../../presentations/protocols'
-import { LogMongoRepository } from '../../../infra/db/mongodb/log-repository/log'
-import { makeLoginValidation } from './login-validation'
-import { LoginController } from '../../../presentations/controllers/login/login'
+import { LogMongoRepository } from '../../../infra/db/mongodb/log/log-mongo-repository'
+import { makeLoginValidation } from './login-validation-factory'
+import { LoginController } from '../../../presentations/controllers/login/login-controller'
 import { AuthenticateModel, Authentication } from '../../../domain/usecases/authentication'
 
 const makeAuthenticateStub = (): Authentication => {
