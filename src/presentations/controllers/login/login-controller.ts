@@ -3,13 +3,10 @@ import { Validation } from '../../helpers/validators'
 import { Controller, Authentication, HttpRequest, HttpResponse } from './login-controller-protocols'
 
 export class LoginController implements Controller {
-  private readonly validator: Validation
-  private readonly authentication: Authentication
-
-  constructor (authentication: Authentication, validator: Validation) {
-    this.validator = validator
-    this.authentication = authentication
-  }
+  constructor (
+    private readonly authentication: Authentication,
+    private readonly validator: Validation
+  ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
