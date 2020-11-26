@@ -3,11 +3,11 @@ import { Controller } from '../../../presentations/protocols'
 import { LogMongoRepository } from '../../../infra/db/mongodb/log-repository/log'
 import { makeLoginValidation } from './login-validation'
 import { LoginController } from '../../../presentations/controllers/login/login'
-import { Authentication } from '../../../domain/usecases/authentication'
+import { AuthenticateModel, Authentication } from '../../../domain/usecases/authentication'
 
 const makeAuthenticateStub = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (email: string, password: string): Promise<string> {
+    async auth (authentication: AuthenticateModel): Promise<string> {
       return 'any_token'
     }
   }
