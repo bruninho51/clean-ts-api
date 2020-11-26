@@ -30,13 +30,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d1f75be-f1d7-4805-a608-eea196174a9d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/protocols/criptography/token-generator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/protocols/criptography/encrypter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication-protocols.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication-protocols.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/usecases/authentication/db-authentication.ts" afterDir="false" />
-    </list>
+    <list default="true" id="8d1f75be-f1d7-4805-a608-eea196174a9d" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,6 +65,7 @@
       <updated>1606400164081</updated>
       <workItem from="1606400166005" duration="448000" />
       <workItem from="1606400833727" duration="1061000" />
+      <workItem from="1606410909118" duration="377000" />
     </task>
     <servers />
   </component>
@@ -87,11 +82,12 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="387" y="0" width="592" height="732" key="find.popup" timestamp="1606401894299">
+    <state x="387" y="0" width="592" height="732" key="find.popup" timestamp="1606411094690">
       <screen x="0" y="0" width="1366" height="732" />
     </state>
-    <state x="387" y="0" width="592" height="732" key="find.popup/0.0.1366.732@0.0.1366.732" timestamp="1606401894299" />
+    <state x="387" y="0" width="592" height="732" key="find.popup/0.0.1366.732@0.0.1366.732" timestamp="1606411094690" />
   </component>
 </project>
