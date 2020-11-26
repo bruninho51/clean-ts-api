@@ -39,7 +39,7 @@ describe('Login Routes', () => {
       await accountCollection.insertOne({
         name: 'any_name',
         email: 'any_email@mail.com',
-        password: hash('any_password', 12)
+        password: await hash('any_password', 12)
       })
       await request(app)
         .post('/api/login')
@@ -48,6 +48,15 @@ describe('Login Routes', () => {
           password: 'any_password'
         })
         .expect(200)
+    })
+    test('Should return 401 on login', async () => {
+      await request(app)
+        .post('/api/login')
+        .send({
+          email: 'any_email@mail.com',
+          password: 'any_password'
+        })
+        .expect(401)
     })
   })
 })
