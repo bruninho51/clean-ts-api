@@ -3,3 +3,4 @@ dir
 coverage
 globalConfig.json
 .idea
+dist
