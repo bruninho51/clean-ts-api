@@ -5,3 +5,4 @@ globalConfig.json
 .idea
 dist
 data
+!src/data
