@@ -14,12 +14,6 @@
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test:ci"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
