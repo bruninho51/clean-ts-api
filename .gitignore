@@ -4,3 +4,4 @@ coverage
 globalConfig.json
 .idea
 dist
+data
