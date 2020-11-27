@@ -1,11 +1,24 @@
-import { AccountModel, AddAccount, AddAccountModel, AddAccountRepository, Hasher } from './db-add-account-protocols'
+import { AccountModel, AddAccount, AddAccountModel, AddAccountRepository, Hasher, LoadAccountByEmailRepository } from './db-add-account-protocols'
 import { DbAddAccount } from './db-add-account'
 
 interface SutTypes {
   sut: AddAccount
   hasherStub: Hasher
   addAccountRepositoryStub: AddAccountRepository
+  loadAccountByEmailRepository: LoadAccountByEmailRepository
 
+}
+
+const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
+  class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
+    async loadByEmail (email: string): Promise<AccountModel> {
+      const account: AccountModel = makeFakeAccount()
+      return account
+    }
+  }
+  const loadAccountByEmailRepository = new LoadAccountByEmailRepositoryStub()
+
+  return loadAccountByEmailRepository
 }
 
 const makeHasher = (): Hasher => {
@@ -49,11 +62,13 @@ const makeAddAccountRepository = (): AddAccountRepository => {
 const makeSut = (): SutTypes => {
   const hasherStub = makeHasher()
   const addAccountRepositoryStub = makeAddAccountRepository()
-  const sut = new DbAddAccount(hasherStub, addAccountRepositoryStub)
+  const loadAccountByEmailRepository = makeLoadAccountByEmailRepository()
+  const sut = new DbAddAccount(hasherStub, addAccountRepositoryStub, loadAccountByEmailRepository)
 
   return {
     hasherStub: hasherStub,
     addAccountRepositoryStub,
+    loadAccountByEmailRepository,
     sut
   }
 }
@@ -96,5 +111,11 @@ describe('DbAddAccount Usecase', () => {
     const accountData = makeFakeAddAccount()
     const account = await sut.add(accountData)
     expect(account).toEqual(makeFakeAccount())
+  })
+  test('Should call LoadAccountByEmailRepository with correct email', async () => {
+    const { sut, loadAccountByEmailRepository } = makeSut()
+    const loadSpy = jest.spyOn(loadAccountByEmailRepository, 'loadByEmail')
+    await await sut.add(makeFakeAccount())
+    expect(loadSpy).toHaveBeenLastCalledWith('valid_email@mail.com')
   })
 })
