@@ -14,7 +14,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('Account Mongo Repository', () => {
+describe('Survey Mongo Repository', () => {
   beforeAll(async () => {
     await MongoHelper.instance.connect(process.env.MONGO_URL)
   })
