@@ -20,20 +20,20 @@ describe('Login Routes', () => {
   })
 
   describe('POST /surveys', () => {
-    test('Should return 204 on add survey success', async () => {
+    test('Should return 403 on try add survey without token', async () => {
       await request(app)
         .post('/api/surveys')
         .send({
           question: 'Question 1',
           answers: [{
-            image: 'https://23670.cdn.simplo7.net/static/23670/sku/quadros-quadro-decorativo-velcro-darth-vader-star-wars--p-1582384116874.jpg',
+            image: 'any_image',
             answer: 'Answer 1'
           },
           {
             answer: 'Answer 2'
           }]
         })
-        .expect(204)
+        .expect(403)
     })
   })
 })
