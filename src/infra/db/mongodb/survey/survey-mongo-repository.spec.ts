@@ -15,6 +15,24 @@ const makeSut = (): SutTypes => {
   }
 }
 
+const insertSurveys = async (): Promise<void> => {
+  await surveyCollection.insertMany([{
+    question: 'any_question',
+    answers: [{
+      image: 'any_image',
+      answer: 'any_answer'
+    }],
+    date: new Date()
+  }, {
+    question: 'other_question',
+    answers: [{
+      image: 'other_image',
+      answer: 'other_answer'
+    }],
+    date: new Date()
+  }])
+}
+
 describe('Survey Mongo Repository', () => {
   beforeAll(async () => {
     mockDate.set(new Date())
@@ -51,21 +69,7 @@ describe('Survey Mongo Repository', () => {
   })
   describe('loadAll()', () => {
     test('Should loadAll surveys on success', async () => {
-      await surveyCollection.insertMany([{
-        question: 'any_question',
-        answers: [{
-          image: 'any_image',
-          answer: 'any_answer'
-        }],
-        date: new Date()
-      }, {
-        question: 'other_question',
-        answers: [{
-          image: 'other_image',
-          answer: 'other_answer'
-        }],
-        date: new Date()
-      }])
+      await insertSurveys()
       const { sut } = makeSut()
       const surveys = await sut.loadAll()
       expect(surveys.length).toBe(2)
