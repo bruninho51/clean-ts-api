@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import request from 'supertest'
-import app from '../config/app'
+import app from '@/main/config/app'
 
 describe('Cors Middleware', () => {
   test('Should parse CORS', async () => {

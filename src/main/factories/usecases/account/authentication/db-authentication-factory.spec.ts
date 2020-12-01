@@ -1,7 +1,7 @@
-import { DbAuthentication } from '../../../../../data/usecases/authentication/db-authentication'
+import { DbAuthentication } from '@/data/usecases/authentication/db-authentication'
 import { makeDbAuthentication } from './db-authentication-factory'
 
-jest.mock('../../../../../data/usecases/authentication/db-authentication')
+jest.mock('@/data/usecases/authentication/db-authentication')
 
 describe('DbAuthentication Factory', () => {
   test('Should call DbAuthentication with all dependencies', () => {

@@ -1,7 +1,7 @@
 import { makeLoginController } from './login-factory'
-import { LoginController } from '../../../../../presentations/controllers/login/login/login-controller'
+import { LoginController } from '@/presentations/controllers/login/login/login-controller'
 
-jest.mock('../../../../../presentations/controllers/login/login/login-controller')
+jest.mock('@/presentations/controllers/login/login/login-controller')
 
 describe('Login Factory', () => {
   test('Should call LoginController with all dependencies', () => {
