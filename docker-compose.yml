@@ -17,6 +17,8 @@ services:
          - ./dist/:/usr/src/clean-node-api/dist/
          - ./package.json:/usr/src/clean-node-api/package.json
        command: bash -c "npm install --only=prod && npm run debug"
+       environment:
+        - MONGO_URL=mongodb://mongo:27017/clean-node-api
        ports:
          - 5050:5050
          - 9222:9222
