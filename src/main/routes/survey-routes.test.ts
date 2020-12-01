@@ -25,6 +25,21 @@ const makeFakeAccount = (): AddAccountModel => ({
   password: 'hashed_password'
 })
 
+const makeAccessToken = async (): Promise<string> => {
+  const res = await accountCollection.insertOne(makeFakeAccount())
+  const id = res.ops[0]._id
+  const accessToken = sign({ id }, env.jwtSecret)
+  await accountCollection.updateOne({
+    _id: id
+  }, {
+    $set: {
+      accessToken
+    }
+  })
+
+  return accessToken
+}
+
 describe('Login Routes', () => {
   beforeAll(async () => {
     await MongoHelper.instance.connect(process.env.MONGO_URL)
@@ -97,16 +112,7 @@ describe('Login Routes', () => {
     })
     test('Should return 200 on load surveys with token', async () => {
       await surveyCollection.insertOne(makeFakeSurveyData())
-      const res = await accountCollection.insertOne(makeFakeAccount())
-      const id = res.ops[0]._id
-      const accessToken = sign({ id }, env.jwtSecret)
-      await accountCollection.updateOne({
-        _id: id
-      }, {
-        $set: {
-          accessToken
-        }
-      })
+      const accessToken = await makeAccessToken()
       await request(app)
         .get('/api/surveys')
         .set('x-access-token', accessToken)
