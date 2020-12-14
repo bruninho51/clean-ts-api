@@ -29,7 +29,7 @@ interface SutTypes {
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      return await new Promise(resolve => resolve(ok(mockAccountModel())))
+      return await Promise.resolve(ok(mockAccountModel()))
     }
   }
   const controllerStub = new ControllerStub()
@@ -66,7 +66,7 @@ describe('Log Controller Decorator', () => {
     const { sut, controllerStub, logErrorRepositoryStub } = makeSut()
 
     const logSpy = jest.spyOn(logErrorRepositoryStub, 'logError')
-    jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(new Promise(resolve => resolve(makeFakeServerError())))
+    jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(Promise.resolve(makeFakeServerError()))
     const httpRequest = makeHttpRequest()
     await sut.handle(httpRequest)
     expect(logSpy).toHaveBeenCalledWith('any_stack')

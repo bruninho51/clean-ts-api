@@ -1,5 +1,4 @@
 import {
-  AccountModel,
   AddAccount,
   AddAccountRepository,
   Hasher,
@@ -21,7 +20,7 @@ const makeSut = (): SutTypes => {
   const hasherStub = mockHasher()
   const addAccountRepositoryStub = mockAddAccountRepository()
   const loadAccountByEmailRepository = mockLoadAccountByEmailRepository()
-  jest.spyOn(loadAccountByEmailRepository, 'loadByEmail').mockReturnValue(new Promise(resolve => resolve(null)))
+  jest.spyOn(loadAccountByEmailRepository, 'loadByEmail').mockReturnValue(Promise.resolve(null))
   const sut = new DbAddAccount(hasherStub, addAccountRepositoryStub, loadAccountByEmailRepository)
 
   return {
@@ -79,7 +78,7 @@ describe('DbAddAccount Usecase', () => {
   })
   test('Should return null if email exists', async () => {
     const { sut, loadAccountByEmailRepository } = makeSut()
-    jest.spyOn(loadAccountByEmailRepository, 'loadByEmail').mockReturnValueOnce(new Promise(resolve => resolve(mockAccountModel())))
+    jest.spyOn(loadAccountByEmailRepository, 'loadByEmail').mockReturnValueOnce(Promise.resolve(mockAccountModel()))
     const account = await sut.add(mockAddAccountParams())
     expect(account).toBeNull()
   })
