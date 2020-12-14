@@ -1,23 +1,8 @@
 import { DbAddSurvey } from './db-add-survey'
-import { AddSurveyRepository, AddSurveyParams } from './db-add-survey-protocols'
+import { AddSurveyRepository } from './db-add-survey-protocols'
 import mockDate from 'mockdate'
-
-const makeFakeSurveyData = (): AddSurveyParams => ({
-  question: 'any_question',
-  answers: [{
-    image: 'any_image',
-    answer: 'any_answer'
-  }],
-  date: new Date()
-})
-
-const makeAddSurveyRepositoryStub = (): AddSurveyRepository => {
-  class AddSurveyRepositoryStub implements AddSurveyRepository {
-    async add (survey: AddSurveyParams): Promise<void> {}
-  }
-  const addSurveyRepositoryStub = new AddSurveyRepositoryStub()
-  return addSurveyRepositoryStub
-}
+import { throwError } from '@/domain/test'
+import { mockAddSurveyRepository, mockSurveyParams } from '@/data/test'
 
 interface SutTypes {
   sut: DbAddSurvey
@@ -25,7 +10,7 @@ interface SutTypes {
 }
 
 const makeSut = (): SutTypes => {
-  const addSurveyRepositoryStub = makeAddSurveyRepositoryStub()
+  const addSurveyRepositoryStub = mockAddSurveyRepository()
   const sut = new DbAddSurvey(addSurveyRepositoryStub)
   return {
     sut,
@@ -43,13 +28,13 @@ describe('DbAddSurvey Usecase', () => {
   test('Should call AddSurveyRepository with correct values', async () => {
     const { sut, addSurveyRepositoryStub } = makeSut()
     const addSpy = jest.spyOn(addSurveyRepositoryStub, 'add')
-    await sut.add(makeFakeSurveyData())
-    expect(addSpy).toHaveBeenCalledWith(makeFakeSurveyData())
+    await sut.add(mockSurveyParams())
+    expect(addSpy).toHaveBeenCalledWith(mockSurveyParams())
   })
   test('Should throw if AddSurveyRepository throws', async () => {
     const { sut, addSurveyRepositoryStub } = makeSut()
-    jest.spyOn(addSurveyRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
-    const surveyData = makeFakeSurveyData()
+    jest.spyOn(addSurveyRepositoryStub, 'add').mockImplementationOnce(throwError)
+    const surveyData = mockSurveyParams()
     const promise = sut.add(surveyData)
     await expect(promise).rejects.toThrow()
   })
