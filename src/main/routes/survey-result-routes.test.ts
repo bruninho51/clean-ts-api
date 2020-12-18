@@ -1,4 +1,4 @@
-import { AddAccountModel } from '@/presentations/controllers/login/signup/signup-controller-protocols'
+import { AddAccountParams } from '@/presentations/controllers/login/signup/signup-controller-protocols'
 import { sign } from 'jsonwebtoken'
 import { Collection } from 'mongodb'
 import request from 'supertest'
@@ -9,7 +9,7 @@ import env from '../config/env'
 let surveyCollection: Collection
 let accountCollection: Collection
 
-const makeFakeAccount = (): AddAccountModel => ({
+const makeFakeAccount = (): AddAccountParams => ({
   name: 'any_name',
   email: 'any_email@mail.com',
   password: 'hashed_password'
