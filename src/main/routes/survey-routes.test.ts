@@ -1,16 +1,17 @@
 import { sign } from 'jsonwebtoken'
 import { Collection } from 'mongodb'
 import request from 'supertest'
-import { AddSurveyModel } from '@/domain/usecases/survey/add-survey'
-import { AddAccountModel } from '@/domain/usecases/account/add-account'
+import { AddSurveyParams } from '@/domain/usecases/survey/add-survey'
+import { AddAccountParams } from '@/domain/usecases/account/add-account'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import app from '@/main/config/app'
 import env from '@/main/config/env'
+import { mockAccountModel } from '@/domain/test'
 
 let surveyCollection: Collection
 let accountCollection: Collection
 
-const makeFakeSurveyData = (): AddSurveyModel => ({
+const makeFakeSurveyData = (): AddSurveyParams => ({
   question: 'any_question',
   answers: [{
     image: 'any_image',
@@ -19,14 +20,8 @@ const makeFakeSurveyData = (): AddSurveyModel => ({
   date: new Date()
 })
 
-const makeFakeAccount = (): AddAccountModel => ({
-  name: 'any_name',
-  email: 'any_email@mail.com',
-  password: 'hashed_password'
-})
-
 const makeAccessToken = async (): Promise<string> => {
-  const res = await accountCollection.insertOne(makeFakeAccount())
+  const res = await accountCollection.insertOne(mockAccountModel())
   const id = res.ops[0]._id
   const accessToken = sign({ id }, env.jwtSecret)
   await accountCollection.updateOne({
