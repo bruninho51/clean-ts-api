@@ -1,10 +1,17 @@
 import { SaveSurveyResultParams, SurveyResultModel } from '@/data/usecases/survey/save-survey-result/db-save-survey-result-protocols'
 
 export const mockSurveyResultModel = (): SurveyResultModel => ({
-  id: 'any_id',
-  accountId: 'any_account_id',
+  question: 'any_question',
   surveyId: 'any_survey_id',
-  answer: 'any_answer',
+  answers: [{
+    answer: 'any_answer',
+    count: 1,
+    percent: 50
+  }, {
+    answer: 'other_answer',
+    count: 1,
+    percent: 50
+  }],
   date: new Date()
 })
 

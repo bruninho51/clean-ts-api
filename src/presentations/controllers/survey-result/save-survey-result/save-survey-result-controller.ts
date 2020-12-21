@@ -5,16 +5,17 @@ import { LoadSurveyById, Controller, HttpRequest, HttpResponse } from './save-su
 
 export class SaveSurveyResultController implements Controller {
   constructor (
-    private readonly loadSurveyByIdStub: LoadSurveyById,
-    private readonly saveSurveyResultStub: SaveSurveyResult
+    private readonly loadSurveyById: LoadSurveyById,
+    private readonly saveSurveyResult: SaveSurveyResult
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { surveyId } = httpRequest.params
+      console.log(httpRequest)
       const { accountId } = httpRequest
       const { answer } = httpRequest.body
-      const survey = await this.loadSurveyByIdStub.loadById(surveyId)
+      const survey = await this.loadSurveyById.loadById(surveyId)
       if (survey) {
         const answers: string[] = survey.answers.map(a => a.answer)
         if (!answers.includes(answer)) {
@@ -24,7 +25,7 @@ export class SaveSurveyResultController implements Controller {
         return forbidden(new InvalidParamError('surveyId'))
       }
 
-      const surveyResult = await this.saveSurveyResultStub.save({
+      const surveyResult = await this.saveSurveyResult.save({
         surveyId,
         accountId,
         date: new Date(),
