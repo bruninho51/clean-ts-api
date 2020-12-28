@@ -25,11 +25,14 @@ const makeSurvey = async (): Promise<SurveyModel> => {
   const res = await surveyCollection.insertOne({
     question: 'any_question',
     answers: [{
-      image: 'any_image',
-      answer: 'any_answer'
+      image: 'any_image_1',
+      answer: 'any_answer_1'
     }, {
-      image: 'other_image',
-      answer: 'other_answer'
+      image: 'any_image_2',
+      answer: 'any_answer_2'
+    }, {
+      image: 'any_image_3',
+      answer: 'any_answer_3'
     }],
     date: new Date()
   })
@@ -105,6 +108,44 @@ describe('Survey Mongo Repository', () => {
       expect(surveyResult).toBeTruthy()
       expect(surveyResult.answers[0].count).toBe(1)
       expect(surveyResult.answers[0].percent).toBe(100)
+    })
+  })
+
+  describe('loadBySurveyId()', () => {
+    test('Should load survey result', async () => {
+      const survey = await makeSurvey()
+      const account = await makeAccount()
+      await surveyResultsCollection.insertMany([{
+        surveyId: new ObjectId(survey.id),
+        accountId: new ObjectId(account.id),
+        answer: survey.answers[0].answer,
+        date: new Date()
+      }, {
+        surveyId: new ObjectId(survey.id),
+        accountId: new ObjectId(account.id),
+        answer: survey.answers[0].answer,
+        date: new Date()
+      }, {
+        surveyId: new ObjectId(survey.id),
+        accountId: new ObjectId(account.id),
+        answer: survey.answers[1].answer,
+        date: new Date()
+      }, {
+        surveyId: new ObjectId(survey.id),
+        accountId: new ObjectId(account.id),
+        answer: survey.answers[1].answer,
+        date: new Date()
+      }])
+      const { sut } = makeSut()
+      const surveyResult: SurveyResultModel = await sut.loadBySurveyId(survey.id)
+      expect(surveyResult).toBeTruthy()
+      expect(surveyResult.surveyId).toEqual(survey.id)
+      expect(surveyResult.answers[0].count).toBe(2)
+      expect(surveyResult.answers[0].percent).toBe(50)
+      expect(surveyResult.answers[1].count).toBe(2)
+      expect(surveyResult.answers[1].percent).toBe(50)
+      expect(surveyResult.answers[2].count).toBe(0)
+      expect(surveyResult.answers[2].percent).toBe(0)
     })
   })
 })
