@@ -1,20 +1,24 @@
-import { SaveSurveyResultRepository } from './db-save-survey-result-protocols'
+import { SaveSurveyResultRepository } from '@/data/protocols/db/survey-result/save-survey-result-repository'
+import { LoadSurveyResultRepository } from '../load-survey-result/db-load-survey-result-protocols'
 import { DbSaveSurveyResult } from './db-save-survey-result'
 import mockDate from 'mockdate'
 import { throwError, mockSurveyResultModel, mockSurveyResultParams } from '@/domain/test'
-import { mockSaveSurveyResultRepository } from '@/data/test'
+import { makeLoadSurveyResultRepository, mockSaveSurveyResultRepository } from '@/data/test'
 
 interface SutTypes {
   sut: DbSaveSurveyResult
   saveSurveyResultRepositoryStub: SaveSurveyResultRepository
+  loadSurveyResultRepositoryStub: LoadSurveyResultRepository
 }
 
 const makeSut = (): SutTypes => {
   const saveSurveyResultRepositoryStub = mockSaveSurveyResultRepository()
-  const sut = new DbSaveSurveyResult(saveSurveyResultRepositoryStub)
+  const loadSurveyResultRepositoryStub = makeLoadSurveyResultRepository()
+  const sut = new DbSaveSurveyResult(saveSurveyResultRepositoryStub, loadSurveyResultRepositoryStub)
   return {
     sut,
-    saveSurveyResultRepositoryStub
+    saveSurveyResultRepositoryStub,
+    loadSurveyResultRepositoryStub
   }
 }
 
@@ -30,6 +34,12 @@ describe('DbAddSurvey Usecase', () => {
     const saveSpy = jest.spyOn(saveSurveyResultRepositoryStub, 'save')
     await sut.save(mockSurveyResultParams())
     expect(saveSpy).toHaveBeenCalledWith(mockSurveyResultParams())
+  })
+  test('Should call LoadSurveyResultRepository with correct values', async () => {
+    const { sut, loadSurveyResultRepositoryStub } = makeSut()
+    const loadBySurveyIdSpy = jest.spyOn(loadSurveyResultRepositoryStub, 'loadBySurveyId')
+    await sut.save(mockSurveyResultParams())
+    expect(loadBySurveyIdSpy).toHaveBeenCalledWith('any_survey_id')
   })
   test('Should throw if SaveSurveyResultRepository throws', async () => {
     const { sut, saveSurveyResultRepositoryStub } = makeSut()
