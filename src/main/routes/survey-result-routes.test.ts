@@ -97,4 +97,20 @@ describe('GET /surveys/:surveyId/results', () => {
       })
       .expect(403)
   })
+  test('Should return 200 on laod survey result with accessToken', async () => {
+    const accessToken = await makeAccessToken()
+    const res = await surveyCollection.insertOne({
+      question: 'Question',
+      answers: [{
+        answer: 'Answer 1',
+        image: 'any_image'
+      }],
+      date: new Date()
+    })
+    const id: string = res.ops[0]._id
+    await request(app)
+      .get(`/api/surveys/${id}/results`)
+      .set('x-access-token', accessToken)
+      .expect(200)
+  })
 })
