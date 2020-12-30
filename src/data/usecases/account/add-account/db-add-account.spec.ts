@@ -1,7 +1,6 @@
 import {
   AddAccount,
   AddAccountRepository,
-  Hasher,
   LoadAccountByEmailRepository
 } from './db-add-account-protocols'
 import { DbAddAccount } from './db-add-account'
