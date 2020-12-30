@@ -73,3 +73,28 @@ describe('PUT /surveys/:surveyId/results', () => {
       .expect(200)
   })
 })
+
+describe('GET /surveys/:surveyId/results', () => {
+  beforeAll(async () => {
+    await MongoHelper.instance.connect(process.env.MONGO_URL)
+  })
+
+  afterAll(async () => {
+    await MongoHelper.instance.disconnect()
+  })
+
+  beforeEach(async () => {
+    surveyCollection = await MongoHelper.instance.getCollection('surveys')
+    await surveyCollection.deleteMany({})
+    accountCollection = await MongoHelper.instance.getCollection('accounts')
+    await accountCollection.deleteMany({})
+  })
+  test('Should return 403 on load survey result without accessToken', async () => {
+    await request(app)
+      .get('/api/surveys/any_id/results')
+      .send({
+        answer: 'any_answer'
+      })
+      .expect(403)
+  })
+})
