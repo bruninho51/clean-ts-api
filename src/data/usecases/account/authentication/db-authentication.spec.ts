@@ -85,10 +85,13 @@ describe('DbAuthentication UseCase', () => {
     const promise = sut.auth(mockAuthentication())
     await expect(promise).rejects.toThrow()
   })
-  test('Should call Encrypter with correct id', async () => {
+  test('Should return authenticationModel if success', async () => {
     const { sut } = makeSut()
-    const accessToken = await sut.auth(mockAuthentication())
-    expect(accessToken).toBe('any_token')
+    const authenticationModel = await sut.auth(mockAuthentication())
+    expect(authenticationModel).toEqual({
+      accessToken: 'any_token',
+      name: 'any_name'
+    })
   })
   test('Should call UpdateAccessTokenRepository with correct values', async () => {
     const { sut, updateAccessTokenRepositoryStub } = makeSut()

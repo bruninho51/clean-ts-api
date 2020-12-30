@@ -6,6 +6,7 @@ import { ok, serverError, badRequest, forbidden } from '../../../helpers/http/ht
 import { AuthenticateParams, Authentication } from '@/domain/usecases/account/authentication'
 import { throwError } from '@/domain/test'
 import { mockAddAccount } from '@/presentations/test'
+import { AuthenticationModel } from '@/domain/models/authentication'
 
 interface SutTypes {
   sut: SignUpController
@@ -16,8 +17,11 @@ interface SutTypes {
 
 const makeAuthenticate = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (Authentication: AuthenticateParams): Promise<string> {
-      return 'any_token'
+    async auth (Authentication: AuthenticateParams): Promise<AuthenticationModel> {
+      return {
+        accessToken: 'any_token',
+        name: 'any_name'
+      }
     }
   }
 
@@ -83,7 +87,7 @@ describe('SignUp Controller', () => {
     const { sut } = makeSut()
     const httpRequest = makeHttpRequest()
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token', name: 'any_name' }))
   })
   test('Should call Validation with correct value', async () => {
     const { sut, validationStub } = makeSut()
