@@ -6,25 +6,25 @@ import {
 } from './db-add-account-protocols'
 import { DbAddAccount } from './db-add-account'
 import { mockAccountModel, mockAddAccountParams, throwError } from '@/domain/test'
-import { mockHasher, mockAddAccountRepository, mockLoadAccountByEmailRepository } from '@/data/test'
+import { HasherSpy, mockAddAccountRepository, mockLoadAccountByEmailRepository } from '@/data/test'
 
 interface SutTypes {
   sut: AddAccount
-  hasherStub: Hasher
+  hasherSpy: HasherSpy
   addAccountRepositoryStub: AddAccountRepository
   loadAccountByEmailRepository: LoadAccountByEmailRepository
 
 }
 
 const makeSut = (): SutTypes => {
-  const hasherStub = mockHasher()
+  const hasherSpy = new HasherSpy()
   const addAccountRepositoryStub = mockAddAccountRepository()
   const loadAccountByEmailRepository = mockLoadAccountByEmailRepository()
   jest.spyOn(loadAccountByEmailRepository, 'loadByEmail').mockReturnValue(Promise.resolve(null))
-  const sut = new DbAddAccount(hasherStub, addAccountRepositoryStub, loadAccountByEmailRepository)
+  const sut = new DbAddAccount(hasherSpy, addAccountRepositoryStub, loadAccountByEmailRepository)
 
   return {
-    hasherStub: hasherStub,
+    hasherSpy: hasherSpy,
     addAccountRepositoryStub,
     loadAccountByEmailRepository,
     sut
@@ -33,15 +33,14 @@ const makeSut = (): SutTypes => {
 
 describe('DbAddAccount Usecase', () => {
   test('Should call Hasher with correct password', async () => {
-    const { hasherStub, sut } = makeSut()
-    const hashSpy = jest.spyOn(hasherStub, 'hash')
+    const { hasherSpy, sut } = makeSut()
     const accountData = mockAddAccountParams()
     await sut.add(accountData)
-    expect(hashSpy).toHaveBeenCalledWith('any_password')
+    expect(hasherSpy.value).toBe('any_password') // exemplo de spy sem o jest
   })
   test('Should throw if Hasher throws', async () => {
-    const { hasherStub, sut } = makeSut()
-    jest.spyOn(hasherStub, 'hash').mockImplementationOnce(throwError)
+    const { hasherSpy, sut } = makeSut()
+    jest.spyOn(hasherSpy, 'hash').mockImplementationOnce(throwError)
     const accountData = mockAddAccountParams()
     const promise = sut.add(accountData)
     await expect(promise).rejects.toThrow()

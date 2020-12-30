@@ -3,16 +3,13 @@ import { Decrypter } from '@/data/protocols/criptography/decrypter'
 import { Encrypter } from '@/data/protocols/criptography/encrypter'
 import { HashComparer } from '@/data/protocols/criptography/hash-comparer'
 
-export const mockHasher = (): Hasher => {
-  class HasherStub implements Hasher {
-    async hash (value: string): Promise<string> {
-      return await Promise.resolve('any_password')
-    }
+export class HasherSpy implements Hasher {
+  public value: string
+
+  async hash (value: string): Promise<string> {
+    this.value = value
+    return await Promise.resolve('any_password')
   }
-
-  const hasherStub = new HasherStub()
-
-  return hasherStub
 }
 
 export const mockDecrypter = (): Decrypter => {
