@@ -5,7 +5,7 @@ import { LogControllerDecorator } from './log-controller-decorator'
 import { mockAccountModel } from '@/domain/test'
 import { mockLogErrorRepository } from '@/data/test'
 
-const makeHttpRequest = (): HttpRequest => ({
+const makeHttpRequest = (): any => ({
   body: {
     name: 'any_name',
     email: 'any_email@mail.com',

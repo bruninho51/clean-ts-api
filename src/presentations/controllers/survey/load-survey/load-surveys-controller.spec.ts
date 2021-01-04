@@ -1,11 +1,11 @@
-import { LoadSurveysController, LoadSurveys, HttpRequest } from './load-surveys-controller-protocols'
+import { LoadSurveysController, LoadSurveys, LoadSurveysControllerRequest } from './load-surveys-controller-protocols'
 import mockDate from 'mockdate'
 import { noContent, ok, serverError } from '../../../helpers/http/http-helper'
 import { throwError } from '@/domain/test'
 import { mockLoadSurveys } from '@/presentations/test'
 import { mockSurveyModels } from '@/data/test'
 
-const makeFakeRequest = (): HttpRequest => ({
+const makeFakeRequest = (): LoadSurveysControllerRequest => ({
   accountId: 'any_id'
 })
 interface SutTypes {

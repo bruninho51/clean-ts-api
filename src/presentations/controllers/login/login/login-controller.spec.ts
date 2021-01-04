@@ -1,6 +1,6 @@
-import { LoginController } from './login-controller'
+import { LoginController, LoginControllerRequest } from './login-controller'
 import { badRequest, ok, serverError, unauthorized } from '../../../helpers/http/http-helper'
-import { HttpRequest, Authentication } from './login-controller-protocols'
+import { Authentication } from './login-controller-protocols'
 import { Validation } from '@/validation/validators'
 import { throwError } from '@/domain/test'
 import { mockAuthenticate, mockValidation } from '@/presentations/test'
@@ -11,11 +11,9 @@ interface SutTypes {
   validationStub: Validation
 }
 
-const mockRequest = (): HttpRequest => ({
-  body: {
-    email: 'any_email@mail.com',
-    password: 'any_password'
-  }
+const mockRequest = (): LoginControllerRequest => ({
+  email: 'any_email@mail.com',
+  password: 'any_password'
 })
 
 const makeSut = (): SutTypes => {
@@ -66,7 +64,7 @@ describe('Login Controller', () => {
 
     const httpRequest = mockRequest()
     await sut.handle(httpRequest)
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest)
   })
   test('Should return 400 if Validation returns an error', async () => {
     const { sut, validationStub } = makeSut()

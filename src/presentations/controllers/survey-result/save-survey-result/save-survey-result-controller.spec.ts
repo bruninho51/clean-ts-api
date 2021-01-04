@@ -1,18 +1,14 @@
-import { HttpRequest, LoadSurveyById, SaveSurveyResult } from './save-survey-result-controller-protocols'
-import { SaveSurveyResultController } from './save-survey-result-controller'
+import { LoadSurveyById, SaveSurveyResult } from './save-survey-result-controller-protocols'
+import { SaveSurveyResultController, SaveSurveyResultControllerRequest } from './save-survey-result-controller'
 import { forbidden, ok, serverError } from '@/presentations/helpers/http/http-helper'
 import { InvalidParamError } from '@/presentations/errors'
 import mockDate from 'mockdate'
 import { mockSurveyResultModel, throwError } from '@/domain/test'
 import { mockLoadSurveyById, mockSaveSurveyResult } from '@/presentations/test'
 
-const mockRequest = (): HttpRequest => ({
-  params: {
-    surveyId: 'any_survey_id'
-  },
-  body: {
-    answer: 'any_answer'
-  },
+const mockRequest = (): SaveSurveyResultControllerRequest => ({
+  surveyId: 'any_survey_id',
+  answer: 'any_answer',
   accountId: 'any_account_id'
 })
 
@@ -61,12 +57,9 @@ describe('SaveSurveyResult Controller', () => {
   test('Should return 403 if an invalid answer is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({
-      params: {
-        surveyId: 'any_id'
-      },
-      body: {
-        answer: 'wrong_answer'
-      }
+      surveyId: 'any_id',
+      answer: 'wrong_answer',
+      accountId: 'any_account'
     })
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('answer')))
   })
@@ -74,12 +67,7 @@ describe('SaveSurveyResult Controller', () => {
     const { sut, saveSurveyResultStub } = makeSut()
     const saveSpy = jest.spyOn(saveSurveyResultStub, 'save')
     await sut.handle(mockRequest())
-    expect(saveSpy).toHaveBeenCalledWith({
-      surveyId: 'any_survey_id',
-      accountId: 'any_account_id',
-      date: new Date(),
-      answer: 'any_answer'
-    })
+    expect(saveSpy).toHaveBeenCalledWith({ ...mockRequest(), date: new Date() })
   })
   test('Should return 500 if SaveSurveyResult throws', async () => {
     const { sut, saveSurveyResultStub } = makeSut()

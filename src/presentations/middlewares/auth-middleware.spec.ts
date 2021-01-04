@@ -1,14 +1,12 @@
 import { forbidden, ok, serverError } from '../helpers/http/http-helper'
 import { AccessDeniedError } from '../errors/access-denied-error'
-import { AuthMiddleware } from './auth-middleware'
-import { HttpRequest, LoadAccountByToken } from './auth-middleware-protocols'
+import { AuthMiddleware, AuthMiddlewareRequest } from './auth-middleware'
+import { LoadAccountByToken } from './auth-middleware-protocols'
 import { throwError } from '@/domain/test'
 import { mockLoadAccountByToken } from '@/data/test'
 
-const mockRequest = (): HttpRequest => ({
-  headers: {
-    'x-access-token': 'any_token'
-  }
+const mockRequest = (): AuthMiddlewareRequest => ({
+  accessToken: 'any_token'
 })
 interface SutTypes {
   sut: AuthMiddleware

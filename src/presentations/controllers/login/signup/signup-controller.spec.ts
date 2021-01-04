@@ -1,7 +1,6 @@
-import { SignUpController } from './signup-controller'
+import { SignUpController, SignUpControllerRequest } from './signup-controller'
 import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
 import { AddAccount, Validation } from './signup-controller-protocols'
-import { HttpRequest } from '@/presentations/protocols'
 import { ok, serverError, badRequest, forbidden } from '../../../helpers/http/http-helper'
 import { AuthenticateParams, Authentication } from '@/domain/usecases/account/authentication'
 import { throwError } from '@/domain/test'
@@ -28,13 +27,11 @@ const makeAuthenticate = (): Authentication => {
   return new AuthenticationStub()
 }
 
-const makeHttpRequest = (): HttpRequest => ({
-  body: {
-    name: 'any_name',
-    email: 'any_email@mail.com',
-    password: 'any_password',
-    passwordConfirmation: 'any_password'
-  }
+const makeHttpRequest = (): SignUpControllerRequest => ({
+  name: 'any_name',
+  email: 'any_email@mail.com',
+  password: 'any_password',
+  passwordConfirmation: 'any_password'
 })
 
 const makeValidation = (): Validation => {
@@ -95,7 +92,7 @@ describe('SignUp Controller', () => {
 
     const httpRequest = makeHttpRequest()
     await sut.handle(httpRequest)
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest)
   })
   test('Should return 400 if Validation returns an error', async () => {
     const { sut, validationStub } = makeSut()

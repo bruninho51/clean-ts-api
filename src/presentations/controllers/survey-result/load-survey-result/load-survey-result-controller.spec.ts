@@ -3,15 +3,13 @@ import { LoadSurveyResult } from '@/domain/usecases/survey-result/load-survey-re
 import { InvalidParamError } from '@/presentations/errors'
 import { forbidden, ok, serverError } from '@/presentations/helpers/http/http-helper'
 import { mockLoadSurveyById, mockLoadSurveyResult } from '@/presentations/test'
-import { HttpRequest, LoadSurveyById } from '../save-survey-result/save-survey-result-controller-protocols'
-import { LoadSurveyResultController } from './load-survey-result-controller'
+import { LoadSurveyById } from '../save-survey-result/save-survey-result-controller-protocols'
+import { LoadSurveyResultController, LoadSurveyResultControllerRequest } from './load-survey-result-controller'
 import mockDate from 'mockdate'
 
-const makeFakeRequest = (): HttpRequest => ({
-  accountId: 'any_account_id',
-  params: {
-    surveyId: 'any_id'
-  }
+const makeFakeRequest = (): LoadSurveyResultControllerRequest => ({
+  surveyId: 'any_id',
+  accountId: 'any_account_id'
 })
 
 type SutTypes = {
