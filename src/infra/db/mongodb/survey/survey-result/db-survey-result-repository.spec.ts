@@ -170,10 +170,10 @@ describe('Survey Mongo Repository', () => {
       expect(surveyResult.surveyId).toEqual(survey.id)
       expect(surveyResult.answers[0].count).toBe(2)
       expect(surveyResult.answers[0].percent).toBe(67)
-      expect(surveyResult.answers[0].isCurrentAccountAnswer).toBe(true)
+      expect(surveyResult.answers[0].isCurrentAccountAnswer).toBe(false)
       expect(surveyResult.answers[1].count).toBe(1)
       expect(surveyResult.answers[1].percent).toBe(33)
-      expect(surveyResult.answers[1].isCurrentAccountAnswer).toBe(false)
+      expect(surveyResult.answers[1].isCurrentAccountAnswer).toBe(true)
     })
 
     test('Should load survey result 3', async () => {
