@@ -8,6 +8,7 @@ import { LoadSurveyResultController } from './load-survey-result-controller'
 import mockDate from 'mockdate'
 
 const makeFakeRequest = (): HttpRequest => ({
+  accountId: 'any_account_id',
   params: {
     surveyId: 'any_id'
   }
@@ -59,7 +60,7 @@ describe('LoadSurveyResultController', () => {
     const { sut, loadSurveyResultStub } = makeSut()
     const loadSpy = jest.spyOn(loadSurveyResultStub, 'load')
     await sut.handle(makeFakeRequest())
-    expect(loadSpy).toHaveBeenCalledWith('any_id')
+    expect(loadSpy).toHaveBeenCalledWith('any_id', 'any_account_id')
   })
   test('Should return 500 if LoadSurveyResult throws', async () => {
     const { sut, loadSurveyResultStub } = makeSut()
