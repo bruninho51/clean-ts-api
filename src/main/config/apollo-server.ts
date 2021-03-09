@@ -5,7 +5,7 @@ import resolvers from '@/main/graphql/resolvers'
 import { GraphQLError } from 'graphql'
 
 const handleErrors = (response: any, errors: readonly GraphQLError[]): void => {
-  errors.forEach(error => {
+  errors?.forEach(error => {
     if (checkError(error, 'AuthenticationError')) {
       response.data = undefined
       response.http.status = 401
