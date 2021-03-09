@@ -1,10 +1,8 @@
+import { adaptResolver } from '@/main/adapters/apollo-server-resolve-adapter'
+import { makeLoginController } from '@/main/factories/controllers/login/login/login-factory'
+
 export default {
-    Query: {
-        login() {
-            return {
-                accessToken: 'any_token',
-                name: 'any_name'
-            }
-        }
-    }
+  Query: {
+    login: async (parent: any, args: any): Promise<any> => await adaptResolver(makeLoginController(), args)
+  }
 }
