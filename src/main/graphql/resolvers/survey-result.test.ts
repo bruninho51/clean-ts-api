@@ -36,7 +36,7 @@ const makeAccessToken = async (): Promise<string> => {
   return accessToken
 }
 
-describe('Login GraphQL', () => {
+describe('Survey Result GraphQL', () => {
   beforeAll(async () => {
     await MongoHelper.instance.connect(process.env.MONGO_URL)
     apolloServer = makeApolloServer()
@@ -52,25 +52,26 @@ describe('Login GraphQL', () => {
     await surveyCollection.deleteMany({})
     await accountCollection.deleteMany({})
   })
-  describe('Surveys Query', () => {
-    const surveysQuery = gql`
-        query surveys {
-          surveys {
-            id
+  describe('SurveyResult Query', () => {
+    const surveyResultQuery = gql`
+        query surveyResult ($surveyId: String!) {
+          surveyResult (surveyId: $surveyId) {
             question
             answers {
-              image
               answer
+              count
+              percent
+              isCurrentAccountAnswer
             }
             date
-            didAnswer
           }
         }
     `
-    test('Should return Surveys', async () => {
+    test('Should return SurveyResult', async () => {
       const accessToken = await makeAccessToken()
       const surveyModel = makeFakeSurveyData()
-      await surveyCollection.insertOne(surveyModel)
+      const surveyResult = await surveyCollection.insertOne(surveyModel)
+      const surveyId = surveyResult.ops[0]._id
       const { query } = createTestClient({
         apolloServer,
         extendMockRequest: {
@@ -79,18 +80,19 @@ describe('Login GraphQL', () => {
           }
         }
       })
-      const res: any = await query(surveysQuery)
-      expect(res.data.surveys.length).toBe(1)
-    })
-    test('Should return AccessDeniedError if no token is provided', async () => {
-      const surveyModel = makeFakeSurveyData()
-      await surveyCollection.insertOne(surveyModel)
-      const { query } = createTestClient({
-        apolloServer
+      const res: any = await query(surveyResultQuery, {
+        variables: {
+          surveyId: surveyId.toString()
+        }
       })
-      const res: any = await query(surveysQuery)
-      expect(res.data).toBeFalsy()
-      expect(res.errors[0].message).toBe('Access Denied')
+      expect(res.data.surveyResult.question).toBe(surveyModel.question)
+      expect(res.data.surveyResult.date).toBeTruthy()
+      expect(res.data.surveyResult.answers).toEqual([{
+        answer: surveyModel.answers[0].answer,
+        count: 0,
+        isCurrentAccountAnswer: false,
+        percent: 0
+      }])
     })
   })
 })
