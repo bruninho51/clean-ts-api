@@ -82,5 +82,15 @@ describe('Login GraphQL', () => {
       const res: any = await query(surveysQuery)
       expect(res.data.surveys.length).toBe(1)
     })
+    test('Should return AccessDeniedError if no token is provided', async () => {
+      const surveyModel = makeFakeSurveyData()
+      await surveyCollection.insertOne(surveyModel)
+      const { query } = createTestClient({
+        apolloServer
+      })
+      const res: any = await query(surveysQuery)
+      expect(res.data).toBeFalsy()
+      expect(res.errors[0].message).toBe('Access Denied')
+    })
   })
 })
