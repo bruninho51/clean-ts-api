@@ -36,7 +36,7 @@ const makeAccessToken = async (): Promise<string> => {
   return accessToken
 }
 
-describe('Surveys GraphQL', () => {
+describe('Login GraphQL', () => {
   beforeAll(async () => {
     await MongoHelper.instance.connect(process.env.MONGO_URL)
     apolloServer = makeApolloServer()
