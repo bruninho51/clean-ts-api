@@ -153,5 +153,21 @@ describe('Survey Result GraphQL', () => {
         percent: 100
       }])
     })
+    test('Should return AccessDeniedError if no token is provided', async () => {
+      const surveyModel = makeFakeSurveyData()
+      const surveyResult = await surveyCollection.insertOne(surveyModel)
+      const surveyId = surveyResult.ops[0]._id
+      const { mutate } = createTestClient({
+        apolloServer
+      })
+      const res: any = await mutate(surveyResultMutation, {
+        variables: {
+          surveyId: surveyId.toString(),
+          answer: surveyModel.answers[0].answer
+        }
+      })
+      expect(res.data).toBeFalsy()
+      expect(res.errors[0].message).toBe('Access Denied')
+    })
   })
 })
